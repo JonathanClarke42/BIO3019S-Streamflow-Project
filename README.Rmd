@@ -1,0 +1,12 @@
+Author: Jonathan Clarke
+Last edited: 15/8
+
+This repository contains the code, data, manuscript, and executables of a 3-rd year undergraduate streamflow modelling project taken in 2025. As of now, the project is ongoing and incomplete.
+
+Folder: Stan
+This folder contains two files: the model parameterisation in stan (in a text file) and the R.script used to execute this model. Currently, both files are a proof of concept while I learn how to use rstan.
+
+Folder: Process Model Functions
+This folder contains the functions of the equations used to describe the process model. Notations such as "equation 5" denote the equivalent equation describe in the model synopsis, which will be upload to the repo later. 
+
+Some of these functions are incomplete.
