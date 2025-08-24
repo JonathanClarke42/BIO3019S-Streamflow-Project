@@ -9,4 +9,5 @@ This folder contains two files: the model parameterisation in stan (in a text fi
 Folder: Process Model Functions
 This folder contains the functions of the equations used to describe the process model. Notations such as "equation 5" denote the equivalent equation describe in the model synopsis, which will be upload to the repo later. 
 
-Some of these functions are incomplete.
+Folder: Data Preprocessing
+Contains scripts to import data from Github and transform it into model inputs.
