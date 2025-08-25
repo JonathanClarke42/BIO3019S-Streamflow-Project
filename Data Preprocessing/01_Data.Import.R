@@ -28,3 +28,4 @@ N <- length(dat.daily_ly.fr$Date)
 streamflow <- dat.daily_ly.fr$Streamflow.Ave*86400*1000 #litres daily = seconds in a day * number of cumsecs * number of litres to a cubic meter.
 rainfall <- dat.daily_ly.fr$Rainfall.Total*2460000 #litres of rainfall = rainfall (in millimeters) * catchment area size (in metres square).
                                                    #catchment area size of 2.46 Km^2 taken from Mokua, Glenday, and Mazvimavi (2024).
+p <- rep(1,times = N)
