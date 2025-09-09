@@ -22,7 +22,8 @@ meta.dat.daily <- read.csv(url.meta.daily)
 ##' fr == streamFLOW and RAINfall only.
 
 dat.daily_ly.fr <- na.omit(dat.daily_raw[c(4474:4839),c(1,2,5)]) #note that this version of the model simply omits missing values.
-
+c(4013:4368)#year 2023
+c(4474:4839)#most recent 365 entires.
 ####Extract sample size, response, and predictor variables####
 N <- length(dat.daily_ly.fr$Date)
 streamflow <- dat.daily_ly.fr$Streamflow.Ave*86400*1000 #litres daily = seconds in a day * number of cumsecs * number of litres to a cubic meter.

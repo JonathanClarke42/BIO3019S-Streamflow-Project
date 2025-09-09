@@ -1,4 +1,4 @@
-//This model uses a discretized, normalized gamma probability density function as the model IRF.
+//This model uses a normalized negaative binomial probability density function as the model IRF.
 data {
  int N;                    //discrete variable of sample size 
  real<lower=0> S[N];       //matrix of streamflow for each time step.
@@ -7,11 +7,11 @@ data {
 }
 
 parameters {  
-  real<lower=0> lambda;     
-  real<lower=0> eta;
+  //shape parameters for the gamma distribution. Lower bound set to avoid floating-point issues near zero during initialization.
+  real<lower=0.0001> lambda;     
+  real<lower=0.0001> eta;
   //the standard deviation of measurements, i.e. measurement error.
-  real<lower=0> sigma_obs; 
-  
+  real<lower=0> sigma_obs;  
 }
 
 transformed parameters{
@@ -19,7 +19,7 @@ transformed parameters{
   //calculate the unnormalized impulse response function values for each time step.
   real log_IRF_unnormalized[N];
     for(i in 1:N){
-      log_IRF_unnormalized[i] = exp(gamma_lpdf(i|lambda,eta));
+      log_IRF_unnormalized[i] = exp(neg_binomial_lpmf(i|lambda,eta));
     }
   
   //calculate the normalization constant.
@@ -44,9 +44,9 @@ transformed parameters{
 
 model {
   //priors
-  sigma_obs ~ normal(475162.5,393.9);
-  lambda ~ normal(127.3,2.2);
-  eta ~ normal(127.3,2.3);
+  sigma_obs ~ normal(1,1);
+  lambda ~ normal(1,1);
+  eta ~ normal(1,1);
 
   //likelihood
   for(i in 1:N){

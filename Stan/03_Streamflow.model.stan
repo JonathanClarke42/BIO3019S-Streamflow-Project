@@ -1,4 +1,4 @@
-//This model uses a discretized, normalized gamma probability density function as the model IRF.
+//This model is a state-space version of 01.
 data {
  int N;                    //discrete variable of sample size 
  real<lower=0> S[N];       //matrix of streamflow for each time step.
@@ -7,10 +7,14 @@ data {
 }
 
 parameters {  
-  real<lower=0> lambda;     
-  real<lower=0> eta;
-  //the standard deviation of measurements, i.e. measurement error.
+  //shape parameters for the gamma distribution. Lower bound set to avoid floating-point issues near zero during initialization.
+  real<lower=0.0001> lambda;     
+  real<lower=0.0001> eta;
+  //the standard deviation of the process (pro) and observations (obs), i.e. process variability and measurement error.
+  real<lower=0> sigma_pro;
   real<lower=0> sigma_obs; 
+  //state-space estimates.
+  real<lower=0> X[N];
   
 }
 
@@ -44,12 +48,14 @@ transformed parameters{
 
 model {
   //priors
-  sigma_obs ~ normal(475162.5,393.9);
-  lambda ~ normal(127.3,2.2);
-  eta ~ normal(127.3,2.3);
+  sigma_pro ~ normal(0,1);
+  sigma_obs ~ normal(0,1);
+  lambda ~ normal(0.0001,1);
+  eta ~ normal(0.0001,1);
 
-  //likelihood
+  //likelihoods
   for(i in 1:N){
-    S[i] ~ normal(y[i], sigma_obs);
+    X[i] ~ normal(y[i],sigma_pro);  //process model likelihood.
+    S[i] ~ normal(X[i], sigma_obs); //observation model likelihood.
   }          
 }
