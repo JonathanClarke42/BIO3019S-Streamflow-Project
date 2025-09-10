@@ -18,3 +18,6 @@ Folder: Data Preprocessing
 
 Folder: Data Postprocessing
 01: Produces various diagnostic plots (including the options to call Shinystan) to assess model fit and posterior sample quality.
+
+Folder: functions
+Various functions required for the iterative forecasting cycle. Designed to be compatible with future model parameterizations.
