@@ -12,7 +12,7 @@ url.meta.hourly <- "https://raw.githubusercontent.com/JonathanClarke42/streamflo
 
 #import the datasets presently used in the analysis.
 dat.daily_raw <- read.csv(url.daily)
-meta.dat.daily <- read.csv(url.meta.daily)
+#meta.dat.daily <- read.csv(url.meta.daily)
 #dat.hourly_raw <- read.csv(url.hourly)
 #meta.dat.daily <- read.csv(url.meta.daily)
 #meta.dat.hourly <- read.csv(url.meta.hourly)
@@ -22,11 +22,11 @@ meta.dat.daily <- read.csv(url.meta.daily)
 ##' fr == streamFLOW and RAINfall only.
 
 dat.daily_ly.fr <- na.omit(dat.daily_raw[c(4474:4839),c(1,2,5)]) #note that this version of the model simply omits missing values.
-c(4013:4368)#year 2023
-c(4474:4839)#most recent 365 entires.
+rownames(dat.daily_ly.fr) <- NULL
+#c(4013:4368)#year 2023
+#c(4474:4839)#most recent 365 entires.
 ####Extract sample size, response, and predictor variables####
-N <- length(dat.daily_ly.fr$Date)
+N <- nrow(dat.daily_ly.fr)
 streamflow <- dat.daily_ly.fr$Streamflow.Ave*86400*1000 #litres daily = seconds in a day * number of cumsecs * number of litres to a cubic meter.
-rainfall <- dat.daily_ly.fr$Rainfall.Total*2460000 #litres of rainfall = rainfall (in millimeters) * catchment area size (in metres square).
-                                                   #catchment area size of 2.46 Km^2 taken from Mokua, Glenday, and Mazvimavi (2024).
+rainfall <- dat.daily_ly.fr$Rainfall.Total*2460000 #litres of rainfall = rainfall (in millimeters) * catchment area size (in metres square).                                                  #catchment area size of 2.46 Km^2 taken from Mokua, Glenday, and Mazvimavi (2024).
 p <- rep(1,times = N)
