@@ -1,13 +1,20 @@
 Author: Jonathan Clarke
-Last edited: 15/8
+Last edited: 9/9/2025
 
-This repository contains the code, data, manuscript, and executables of a 3-rd year undergraduate streamflow modelling project taken in 2025. As of now, the project is ongoing and incomplete.
+This repository will contain the code, data, manuscript, and executables of a 3-rd year undergraduate streamflow modelling project taken in 2025. As of now, the project is incomplete.
 
 Folder: Stan
-This folder contains two files: the model parameterisation in stan (in a text file) and the R.script used to execute this model. Currently, both files are a proof of concept while I learn how to use rstan.
-
-Folder: Process Model Functions
-This folder contains the functions of the equations used to describe the process model. Notations such as "equation 5" denote the equivalent equation describe in the model synopsis, which will be upload to the repo later. 
+This folder contains .stan txt files for each model, and the .R wrapper file to call them.
+00: Wrapper file to call stan models from and define model settings.
+01: Basic model using a gamma IRF.
+01.2 Optimized version of 01, utilizing vectorization and the fast Fourier transform.
+02: Version of 01 using a negative binomial IRF.
+03: State-space version of 01.
 
 Folder: Data Preprocessing
-Contains scripts to import data from Github and transform it into model inputs.
+01: Imports data from Github and subsets it into manageable chunks.
+02: Basic visualizations of the data.
+03: Runs a change point analysis on the data using RBeast.
+
+Folder: Data Postprocessing
+01: Produces various diagnostic plots (including the options to call Shinystan) to assess model fit and posterior sample quality.
