@@ -8,11 +8,8 @@
 forecastFlow <- function(data,IRF,predThreshold){
   prediction <- list()
   ###Predict streamflow, using the fast Fourier transform###
-  prediction[[1]] <- fft(fft(data[,3])*fft(IRF[1:7]), inverse = T) #transform the input and IRF, multiply them, then back-transform them.
+  prediction[[1]] <- fft(fft(data[,3])*fft(IRF), inverse = T)      #transform the input and IRF, multiply them, then back-transform them.
   prediction[[1]] <- lapply(prediction,Re)                         #extract the real component of the prediction.
   
   return(prediction[[1]])
 }
-
-forecastFlow(rdy.data[[1]],past[[2]],1)
-

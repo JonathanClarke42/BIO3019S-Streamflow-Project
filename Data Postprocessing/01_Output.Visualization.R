@@ -30,7 +30,8 @@ curve(dgamma(x,mean(extracted$lambda),mean(extracted$eta)), xlim = c(1,5))
 
 #Predicted vs. Observed values
 plot(streamflow, type = "l")
-lines(colMeans(extracted$y), col = "blue")
+points(colMeans(extracted$y), col = "blue")
+plot(colMeans(extracted$beta), type = "l")
 
 #Sum of squares
 sum_sq <- 0

@@ -15,13 +15,13 @@ extractParams <- function(fit,names){
     params[i,2] <- sd(extr.params[[i]])
   }
   ###Extract the mean impulse response function values###
-  extr.IRF <- extract(fit, pars = "log_IRF")               #extracts the log impulse response function values from the stanfit object.
-  IRF <- exp(colMeans(extr.IRF$log_IRF))                   #exponentiates the mean IRF values.
-  
-  rm(fit,extr.params,extr.IRF)                             #removes the stanfit object and extracted parameters to save memory.
+  IRF <- colMeans(data.frame(extract(fit, pars = "IRF"))) #extracts the impulse response function values from the stanfit object, converts it to mean over each iteration.
+          
+  y <- colMeans(data.frame(extract(fit, pars = "y")))
   
   ####Returns the results####
-  outList <- list(params = params,                         #constructs a list of each result calculated above.
-                  IRF = IRF)
+  outList <- list(params = params,                        #constructs a list of each result calculated above.
+                  IRF = IRF,
+                  y = y)
   return(outList)
 }

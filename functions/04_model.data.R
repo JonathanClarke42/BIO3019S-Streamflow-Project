@@ -11,7 +11,7 @@ ingestData <- function(data,cycle_width,posterior){
                      R = data[,3])
   
   #Adds the posterior estimates of model parameters as priors to the model-edible list.
-  for(name in rownames(priors)){
+  for(name in rownames(posterior)){
     edibleData[paste0(name,"_mu")] = as.numeric(posterior[name,1])
     edibleData[paste0(name,"_sd")] = as.numeric(posterior[name,2])
   }

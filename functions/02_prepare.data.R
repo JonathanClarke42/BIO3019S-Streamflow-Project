@@ -4,8 +4,6 @@
 ##' @param rdy.data n by 3 matrix of rain, flow, and dates for n observations.
 
 prepData <- function(data,cycle_width){
-  if(nIter*cycle_width>nrow(data)){print("Cycle width is too large for the given data set, some observations may be omitted.")} #prints a warning message if the number of observations is not a multiple of cycle width.
-
   groupings_start <- seq(from = 1, to = nrow(data), by = cycle_width)            #defines the starting index of each data group.
   groupings_end <- seq(from = cycle_width, to = nrow(data), by = cycle_width)    #defines the terminal index of each data group.
   length(groupings_start) <- length(groupings_end)                               #ensures each grouping start has a corresponding end.
